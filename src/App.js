@@ -17,6 +17,7 @@ import Upload from "./components/upload";
 import Feed from "./components/feed";
 import EditAlbum from "./components/Edit/edit-album";
 import { Spinner } from 'reactstrap';
+import AddVideo from "./components/add-video"
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
       <Route path="/add-album" component={AddAlbum}/>
       <Route path="/downloaded" component={Downloaded} />
       <Route path="/album/create" component={AddAlbum}/>
+      <Route path="/video/create" component={AddVideo}/>
       <Route path="/album/:albumId" component={Album}/>
       <Route path="/upload" component={Upload}/>
       <Route path="/feed" component={Feed}/>
