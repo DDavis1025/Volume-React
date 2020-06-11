@@ -22,12 +22,14 @@ render() {
         <Container>
 		    <div className="container">
 		        <div className="downloaded">
-		        <Row xs="2" className="downloaded-row">
-                <Col xs="7" sm="10" md="6" lg="5" className="">
+		        <Row className="downloaded-row">
+                <Col className="">
 		        <div className="image"><ImageUpload file={this.props.file} beforeImageSave={this.props.beforeImageSave} onChange={this.props.onChange} onClick={this.props.onClick}/></div>
 		        </Col>
-		        <Col xs="6" sm="2" md="5" lg="5" className="">
-	<Form onSubmit={this.props.onSubmit} className="form">
+            </Row>
+            <Row className="album_fields_row">
+		        <Col className="">
+	   <Form onSubmit={this.props.onSubmit} className="form">
       <FormGroup row>
         <Label for="title">Title:</Label>
 
@@ -45,7 +47,7 @@ render() {
       <FormGroup row>
         <Label for="description">Description:</Label>
         
-          <Input type="textarea" name="description" id="description" placeholder="Description" value={this.props.album.description} onChange={this.props.downloadChange}/>
+          <Input type="textarea" rows="4" cols="50" name="description" id="description" placeholder="Description" value={this.props.album.description} onChange={this.props.downloadChange}/>
        
       </FormGroup>
 

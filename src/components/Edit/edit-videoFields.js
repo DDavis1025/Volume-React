@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Link } from 'react-router-dom';
-import ImageUpload from './image-upload';
-import AddAlbum from './add-album';
+import EditVideo from './edit-video'
 import { Container, Row, Col } from 'reactstrap';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 
-class VideoFields extends Component {
+class EditVideoFields extends Component {
   constructor(props) {
     super(props);
 
@@ -41,7 +40,7 @@ render() {
       <FormGroup row>
         <Label for="description">Description:</Label>
         
-          <Input type="textarea" cols="50" row="4" name="description" id="description" placeholder="Description" value={this.props.video.description} onChange={this.props.fieldChange}/>
+          <Input type="textarea" rows="4" cols="50" name="description" id="description" placeholder="Description" value={this.props.video.description} onChange={this.props.fieldChange}/>
        
       </FormGroup>
 
@@ -71,4 +70,4 @@ render() {
 }
 };
 
-export default VideoFields;
+export default EditVideoFields;

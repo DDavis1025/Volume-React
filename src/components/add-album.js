@@ -102,7 +102,7 @@ class AddAlbum extends Component {
       beforeImageSave: null,
       file: null,
       files: [],
-      songsList: null,
+      songsList: [],
       albums: {title:"", date:"", description:""},
     };
  
@@ -137,23 +137,8 @@ class AddAlbum extends Component {
       console.log(res.statusText)
  })
 
-  //   axios.put(`http://localhost:3000/albums/${params.albumId}/upload`, data, {
-
-  //   }).then(res => {
-  //     console.log(res.statusText)
-  //   })
-  // }
-
-  //   if (this.state.file === null) {
-  //     axios.delete(`http://localhost:3000/albums/${params.albumId}/upload`)
-  //     .then(res => {
-  //       console.log(res);
-  //       console.log(res.data);
-  //     })
-    // }
-
-console.log("2");
-  }
+}
+ 
 
   componentDidMount() {
     let value = this.context;
@@ -171,45 +156,7 @@ console.log("2");
 }
 
   
-//   componentDidMount() {
-//   const { match: { params} } = this.props;
-//   console.log('COMPONENT HAS MOUNTED');
-//   let files = this.state.files;
-//   let albums = this.state.albums;
-//   let file = this.state.file;
-//   fetch(`http://localhost:3000/albums/${params.albumId}/songs`)
-//     .then((response) =>
-//       response.json())
-//     .then((data) => {
-//           this.setState({ files : data });
-//         }).catch((error) => {
-//             console.log("Error " + error)
-//           })
 
-//     fetch(`http://localhost:3000/albums/${params.albumId}`)
-//     .then((response) =>
-//       response.json())
-//     .then((data) => {
-
-//           if (data.length != 0) {
-//           this.setState({albums: data});
-//         }
-         
-//         }).catch((error) => {
-//             console.log("Error " + error)
-//           })
-
-
-//     fetch(`http://localhost:3000/albums/${params.albumId}/images`)
-//     .then((response) =>
-//       response.json())
-//     .then((data) => {
-//           this.setState({ file : data });
-//         }).catch((error) => {
-//             console.log("Error " + error)
-//           })
-
-// }
 
 downloadChange (event) {
    const { name, value } = event.target;
@@ -232,6 +179,7 @@ handleClick = event => {
   const readFile = (file) => {
  
     // const fileList = [];
+
  
     const fileReader = new FileReader();
  
@@ -267,26 +215,16 @@ handleClick = event => {
 
   const other = event.target.files;
 
-  console.log(other);
 
   // console.log(other);
-  var promise = new Promise(function(resolve, reject) {
-  // do a thing, possibly async, then…
 
-  if (1 === 1) {
-    resolve("Stuff worked!");
-  }
-  else {
-    reject(Error("It broke"));
-  }
-});
-
-promise.then(() => {this.setState({songsList : other})
+Promise.resolve().then(() => {
+this.setState({songsList : other})
 }).then(()=> {
 console.log(this.state.songList)
- }).catch((error) => {
+}).catch((error) => {
   console.log(error);
- })
+})
    
 
  
@@ -295,7 +233,7 @@ console.log(this.state.songList)
   // Now handle the array of promises we just created
   Promise.all(allReaders)
     .then(fileList => {
-
+      console.log("fileList" + JSON.stringify(fileList))
       // set the state that we have all the files
       this.setState({ files: fileList });
        console.log(this.state.files)
@@ -338,6 +276,15 @@ replaceClick = event => {
     })
   }
 
+const other = event.target.files;
+
+Promise.resolve().then(() => {
+this.setState({songsList : other})
+}).then(()=> {
+console.log(this.state.songList)
+}).catch((error) => {
+  console.log(error);
+})
  
  
   // create all the file reader promises
@@ -390,8 +337,15 @@ secondInputClick = event => {
  
     })
   }
-
+const other = event.target.files;
  
+Promise.resolve().then(() => {
+this.setState(prevState => ({ ...prevState, songsList: [...prevState.songsList,  ...other ]}));
+}).then(()=> {
+console.log(this.state.songList)
+}).catch((error) => {
+  console.log(error);
+})
  
   // create all the file reader promises
   // create an array from the files list and use map to generate
@@ -412,151 +366,6 @@ secondInputClick = event => {
  
 }
 
-
-// save(event) {
-//    event.preventDefault();
-//    console.log(this.state.files)
-//    let files = this.state.files;
-  
-//    let songData;
-  
-//    const { match: { params} } = this.props;
-
-//    let p = new Promise((resolve, reject) => {
-//     resolve('Success');
-//    })
-
-// .then(() => {
-//    // if(clicked === true) {
-//     console.log("replace click");
-//     clicked = false;
-//     let dltRequest = new Request(`http://localhost:3000/albums/${params.albumId}/songs/`, {
-//     method: 'DELETE',
-//     headers: new Headers({ 'Content-Type': 'application/json' }),
-//   });
-
-//     fetch(dltRequest)
-//       .then((response) =>
-//         response.json())
-//           .then((data) => {
-//           })
-//           .catch((error) => {
-//             console.log(error)
-//           })
-//   // }
-// }).then(() => {
-//    songData = files.map(( { name }, index, album_id ) => ({ name, index : index}));
-    
-//     let request = new Request(`http://localhost:3000/albums/${params.albumId}/songs`, {
-//     method: 'POST',
-//     headers: new Headers({ 'Content-Type': 'application/json' }),
-//     body: JSON.stringify(songData),
-//     });
-
-
-//     fetch(request)
-//       .then((response) =>
-//         response.json())
-//           .then((data) => {
-//           })
-//           .catch((error) => {
-//             console.log(error)
-//           })
-
-//   for (var i = 0; i < this.state.files.length; i++) {
-//   const id = this.state.files[i].id
-//     let putRequest = new Request(`http://localhost:3000/songs/${id}`, {
-//     method: 'PUT',
-//     headers: new Headers({ 'Content-Type': 'application/json' }),
-//     body: JSON.stringify(songData)
-//   });
-
-//     fetch(putRequest)
-//       .then((response) =>
-//         response.json())
-//           .then((data) => {
-//           })
-//           .catch((error) => {
-//             console.log(error)
-//           })
-
-
-
-// }
-    
-
-// })
-
-// }
-
-
-
-
-
-// onSubmit = (e) => {
-//   e.preventDefault();
-//   let albums = this.state.albums;
-//   let state = this.state;
-//   let albumData;
-//   const { match: { params} } = this.props;
-
-//   albumData = albums.map(album => ({ title : album.title, date: album.date, description: album.description }));
-
-//   if(albumData[0].date  === "" || albumData[0].title  === "" || albumData[0].description === "") {
-//     alert("One Or More Album Fields Don't Have Values");
-//   } else {
-//     let albumRequest = new Request(`http://localhost:3000/albums/`, {
-//     method: 'POST',
-//     headers: new Headers({ 'Content-Type': 'application/json' }),
-//     body: JSON.stringify(albumData),
-//     });
-   
-
-//     fetch(albumRequest)
-//       .then((response) =>
-//         response.json())
-//           .then((data) => {
-//           })
-//           .catch((error) => {
-//             console.log(error)
-//           })
-
-//     let albumPutRequest = new Request(`http://localhost:3000/albums/${params.albumId}`, {
-//     method: 'PUT',
-//     headers: new Headers({ 'Content-Type': 'application/json' }),
-//     body: JSON.stringify(albumData)
-//   });
-
-//     fetch(albumPutRequest)
-//       .then((response) =>
-//         response.json())
-//           .then((data) => {
-//           })
-//           .catch((error) => {
-//             console.log(error)
-//           })
-    
-    
-// }
-
-// }
-
-// handleAuthentication() {
-//     return new Promise((resolve, reject) => {
-//       this.auth0.parseHash((err, authResult) => {
-//         if (err) return reject(err);
-//         if (!authResult || !authResult.idToken) {
-//           return reject(err);
-//         }
-//         this.idToken = authResult.idToken;
-//         this.profile = authResult.idTokenPayload;
-//         // set the time that the id token will expire at
-//         this.expiresAt = authResult.idTokenPayload.exp * 1000;
-//         console.log(authResult);
-//         resolve();
-//       });
-//     })
-//   }
 
 
 save2(event) {
@@ -590,9 +399,9 @@ save2(event) {
 )}));
   let files = this.state.files;
    
-
+   var type = "album";
    this.setState(prevState => ({
-   albums: {...prevState.albums, files, user_id}
+   albums: {...prevState.albums, files, user_id, type}
 }))
 
    Array.from(this.state.songsList).forEach(song => {
@@ -601,20 +410,19 @@ save2(event) {
 
   data.append('albums', JSON.stringify(this.state.albums))
 
+  console.log("this.state.albums" + JSON.stringify(this.state.albums))
+
 
 }).then(()=> {
+  console.log("data" + JSON.stringify(data))
     axios.post("http://localhost:3000/albums", data, { 
   }).then(res => { // then print response status
     console.log(res.statusText)
- })
-})
-.then(()=> {
-  const { match, location, history } = this.props;
-  history.push('/feed');
-  location.reload();
+    const { match, location, history } = this.props;
+    history.push('/albums');
 
-})
-.catch((err)=> {console.log(err)});
+ })
+}).catch((err)=> {console.log(err)});
 
 }
 
@@ -637,8 +445,15 @@ save2(event) {
       result.source.index,
       result.destination.index
     );
- 
+
+    const songsList = reorder(
+      this.state.songsList,
+      result.source.index,
+      result.destination.index
+    );
+
     this.setState({
+      songsList,
       files
     });
   }
@@ -647,6 +462,8 @@ save2(event) {
   removeItem = (index) => {
     this.setState(({ files }) => ({
       files: files.filter((_, ind) => ind !== index) }));
+    this.setState(({ songsList }) => ({
+      songsList: songsList.filter((_, ind) => ind !== index) }));
   }
 
 
@@ -670,8 +487,8 @@ save2(event) {
 
 onClick(event) {
   let albums = this.state.albums;
-  if(albums.date  === "" || albums.title  === "" || albums.description === "") {
-    alert("ERROR: Fields Must Be Filled In Before You Save");
+  if(albums.date  === "" || albums.title  === "" || albums.description === "" || this.state.file === null) {
+    alert("ERROR: You have data or info you haven't added");
     } else {
   this.save2(event);
 }
@@ -679,6 +496,7 @@ onClick(event) {
   
 
   render() {
+    console.log("this.state.files" + JSON.stringify(this.state.files))
    
     // var that = this;
     

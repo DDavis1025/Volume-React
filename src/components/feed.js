@@ -10,7 +10,7 @@ import {
 
 
 class Feed extends Component {
-
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +20,7 @@ class Feed extends Component {
 }
 
   componentDidMount() {
+  this._isMounted = true;
   console.log('COMPONENT HAS MOUNTED');
   let album = this.state.album;
   fetch(`http://localhost:8000/albums`)
@@ -35,14 +36,15 @@ class Feed extends Component {
   }
 
 componentDidUpdate() {
-fetch(`http://localhost:8000/albums`)
-.then((response) =>
-  response.json())
-.then((data) => {
-      this.setState({ album : data });
- }).catch((error) => {
-        console.log("Error " + error)
-      })
+this._isMounted = false;
+// fetch(`http://localhost:8000/albums`)
+// .then((response) =>
+//   response.json())
+// .then((data) => {
+//       this.setState({ album : data });
+//  }).catch((error) => {
+//         console.log("Error " + error)
+//       })
 }
 
   // componentWillUnmount() {
@@ -54,7 +56,6 @@ fetch(`http://localhost:8000/albums`)
 
 
 render() {
-console.log(this.state.album);
 return (
 <div>
 <ul>

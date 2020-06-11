@@ -4,7 +4,7 @@ import { ButtonToggle } from "reactstrap";
 
 
 
-class EditImage extends React.Component {
+class EditTrackImage extends React.Component {
 
  constructor(props) {
     super(props);
@@ -17,7 +17,6 @@ class EditImage extends React.Component {
   }
 
   render() {
-
     return (
       
       <div>
@@ -32,14 +31,21 @@ class EditImage extends React.Component {
         <div className="image" style={{ width: '300px', height: '300px', 
             border: '1px dotted black'}}>
         {this.props.file && (
-        <img style={{ width: "300px", height: "300px"}} src={typeof this.props.file === 'string' && this.props.file.includes("localhost:8000") ? this.props.file : this.props.beforeImageSave} />
+        <img style={{ width: "300px", height: "300px"}} src={this.props.beforeImageSave ? this.props.beforeImageSave : this.props.file} />
         )}
         </div>
 
+        {this.props.file && this.props.file.length !== 0 && (
+          <div>
+           <ButtonToggle onClick={this.props.onClick} color="danger" size="sm">Remove Image
+        </ButtonToggle> 
+           
+          </div>
+        )}
       </div>
      
     );
   }
 }
 
-export default EditImage;
+export default EditTrackImage;

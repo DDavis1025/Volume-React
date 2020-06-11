@@ -52,11 +52,18 @@ body {
   text-decoration: none;
   font-size: 25px;
   margin: 20px 0px 20px 0px;
-  color: #818181;
+  color: lightgray;
   display: block;
   width: 70%;
 }
 
+a.sidenav-li {
+    color: lightgray;
+}
+
+a.sidenav-li:hover {
+    color: darkgray;
+}
 
 
 .downloaded-form {
@@ -65,10 +72,28 @@ body {
 
 
 
+.track_fields_row {
+  max-width: 450px;
+  width: 450px;
+  min-width: 450px;
+}
+
+.video_fields_row {
+  max-width: 450px;
+  width: 450px;
+  min-width: 450px;
+}
+
+.album_fields_row {
+  max-width: 450px;
+  width: 450px;
+  min-width: 450px;
+}
+
 
 
 .sidenav li:hover {
-  color: #f1f1f1;
+  color: darkgray;
 }
 
 .main {
@@ -279,6 +304,48 @@ body {
 .delete {
     cursor: pointer;
 }
+
+.library-nav {
+  display: flex;
+  border-bottom: 1px solid grey;
+  background-color: transparent;
+  
+}
+
+.library-nav li {
+  float: left;
+  display: inline-block;
+  list-style: none;
+  margin: 10px 25px 0px 25px;
+}
+a.nav-menu {
+  color: black;
+}
+
+a.nav-menu:hover {
+  color:black;
+}
+
+a.nav-menu:visited {
+  color:black;
+  text-decoration: underline;
+}
+
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+
+
+
+
+
 
 /*.playlist {
 	margin-left: 200px;

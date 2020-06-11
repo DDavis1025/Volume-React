@@ -18,11 +18,20 @@ import Feed from "./components/feed";
 import EditAlbum from "./components/Edit/edit-album";
 import { Spinner } from 'reactstrap';
 import AddVideo from "./components/add-video"
+import ProfilePage from "./components/profile-page"
+import ProfileAlbums from "./components/Profile/profile-albums"
+import EditVideo from "./components/Edit/edit-video";
+import AddTrack from "./components/addTrack";
+import EditTrack from "./components/Edit/edit-track";
+import UploadPage from "./components/Edit/upload_page";
+import ProfileVideos from "./components/Profile/video";
+import ProfileTracks from "./components/Profile/tracks"
 
 
 function App() {
 
   const { loading } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
   if (loading) {
     return <div style={{height: '100vh', display: 'flex',  justifyContent:'center', alignItems:'center'}}><Spinner style={{ width: '3rem', height: '3rem' }} /></div>
@@ -33,7 +42,9 @@ function App() {
       <div className="App">
       <Router history={history}>
       <NavBar2 />
-      <Navbar title="Oscars 2019"/>
+      <Navbar/>
+      {isAuthenticated && (
+      <div>
       <Switch>
           <Route path="/" exact />
           <PrivateRoute path="/profile" component={Profile} />
@@ -43,12 +54,23 @@ function App() {
       <Route path="/image-upload" component={ImageUpload}/>
       <Route path="/add-album" component={AddAlbum}/>
       <Route path="/downloaded" component={Downloaded} />
-      <Route path="/album/create" component={AddAlbum}/>
-      <Route path="/video/create" component={AddVideo}/>
+      <Route path="/album/upload" component={AddAlbum}/>
+      <Route path="/video/upload" component={AddVideo}/>
       <Route path="/album/:albumId" component={Album}/>
       <Route path="/upload" component={Upload}/>
       <Route path="/feed" component={Feed}/>
-      <Route path="/:albumId/edit" component={EditAlbum}/>
+      <Route path="/user-profile" component={ProfilePage}/>
+      <Route path="/:albumId/album/edit" component={EditAlbum}/>
+      <Route path="/albums" component={ProfileAlbums}/>
+      <Route path="/:videoId/video/edit/" component={EditVideo}/>
+      <Route path="/track/upload/" component={AddTrack}/>
+      <Route path="/:trackId/track/edit/" component={EditTrack}/>
+      <Route path="/uploads/" component={UploadPage}/>
+      <Route path="/videos/" component={ProfileVideos}/>
+      <Route path="/tracks/" component={ProfileTracks}/>
+
+      </div>
+      )}
       </Router>
       </div>
     </BrowserRouter>
