@@ -154,7 +154,7 @@ save(event) {
 
   Promise.resolve().then(() => {
 
-  user_id = this.context.user.sub;
+ user_id = this.context.user.sub;
   
  data = new FormData()
 
@@ -163,7 +163,7 @@ save(event) {
 
   var type = "track";
   this.setState(prevState => ({
-   trackFields: {...prevState.trackFields, user_id, type} 
+   trackFields: {...prevState.trackFields, user_id, type, } 
   }))
 
   data.append('fields', JSON.stringify(this.state.trackFields))
@@ -206,6 +206,7 @@ onClick(event) {
 
   
   render() {
+    console.log("this.context.user.picture" + this.context.user.picture)
     return (
  
       
